@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcrypt';
-
-const prisma = new PrismaClient();
+import prisma from './prisma';
 
 async function main() {
   const HASH = 3;
@@ -9,6 +7,10 @@ async function main() {
     {
       email: 'adan.serrano@gmail.com',
       name: 'Adan Serrano',
+      password: '123456',
+    },{
+      email: 'disaacmaloney@gmail.com',
+      name: 'David Maloney',
       password: '123456',
     },
   ];
