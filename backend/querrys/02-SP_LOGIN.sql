@@ -15,7 +15,7 @@ BEGIN
         VALUES (p_nombre, p_email, PASSWORD(p_password), NOW(), NOW());
         SELECT 'Usuario registrado correctamente.' AS message;
     ELSE
-        SELECT 'El correo ya está registrado. Por favor, elija otro correo.' AS message;
+        SELECT 'El correo ya esta registrado. Por favor, elija otro correo.' AS message;
     END IF;
 END;
 
@@ -32,14 +32,14 @@ CREATE PROCEDURE SP_LOGIN(
 BEGIN
     IF (SELECT COUNT(*) FROM USER WHERE email = p_email) = 1 THEN
         IF (SELECT COUNT(*) FROM USER WHERE email = p_email AND password = PASSWORD(p_password)) = 1 THEN
-            SELECT 'Inicio de sesión exitoso.' AS message;
+            SELECT 'Inicio de sesion exitoso.' AS message;
         ELSE
-            SELECT 'La contraseña es incorrecta.' AS message;
+            SELECT 'La contrasena es incorrecta.' AS message;
         END IF;
     ELSE
-        SELECT 'El correo o la contraseña son inválidos.' AS message;
+        SELECT 'El correo o la contraseña son invalidos.' AS message;
     END IF;
 END; 
 
 -- LLAMAR AL PROCEDIMIENTO ALMACENADO
--- CALL SP_LOGIN('J@J.COM', '123');
+ CALL SP_LOGIN('J@J.COM', '123');

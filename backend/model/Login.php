@@ -1,31 +1,26 @@
 <?php
-    class Login{
-        private $db;
+    require_once('modelo.php');
 
-        public function __construct($db) {
-            $this->db = $db;
-        }
+    class Login extends modeloCredencialesBD{
 
         // Método para crear un usuario
         public function Login($email, $password) 
         {
             try 
             {
-                $stmt = $this->db->prepare("CALL SP_LOGIN(:email, :password)");
-    
-                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-                $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-    
-                $stmt->execute();
+                $instruccion = "CALL SP_LOGIN('". $email."', '". $password."')";
+                $consulta = $this->_db->query($instruccion);
+                
+                $resultado = $consulta->fetch_all(MYSQLI_ASSOC);
 
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                if ($result) {
-                    return true;
-                } else {
-                    return false;
+                if($resultado){
+                    return $resultado;
+                    $resactualizarultado->close();
+                    $this->_db->close();
                 }
-        
+                else{
+                    return "usuario o contraseña incorrectos :p";
+                }        
                 return true; 
             } catch (PDOException $e) {
                 return false; 
