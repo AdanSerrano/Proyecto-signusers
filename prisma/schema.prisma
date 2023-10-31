@@ -6,9 +6,14 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+model Rol {
+  id   Int     @id @default(autoincrement())
+  name    String
+  
+}
 
 model User {
-  id            Int       @id @default(autoincrement()) @map("id")
+  id            Int       @id @default(autoincrement())
   name          String
   email         String    @unique
   password      String
@@ -16,4 +21,6 @@ model User {
   updatedAt     DateTime  @updatedAt
   emailVerified DateTime?
   image         String?
+  id_rol        Int       @relation(fields: [id_rol], references: [id])
+
 }
